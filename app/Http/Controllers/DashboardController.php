@@ -15,9 +15,17 @@ class DashboardController extends Controller
         return view('dashboard.index');
     }
 
-    public function userview(){
-        $data = User::get();
-        return view('dashboard.user',compact('data'));
+    public function userview(Request $request){
+        $data = new User;
+
+        if($request->get('search')){
+            $data = $data->where('name','LIKE','%'.$request->get('search').'%')
+            ->orWhere('email','LIKE','%'.$request->get('search').'%');
+        }
+
+        $data = $data->get();
+
+        return view('dashboard.user',compact('data','request'));
     }
 
     public function usercreate(){

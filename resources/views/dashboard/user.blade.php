@@ -28,18 +28,19 @@
                         <div class="card">
                             <div class="card-header">
                                 <h3 class="card-title">Data Karyawan</h3>
-
                                 <div class="card-tools">
-                                    <div class="input-group input-group-sm" style="width: 150px;">
-                                        <input type="text" name="table_search" class="form-control float-right"
-                                            placeholder="Search">
+                                    <form action="{{ route('admin.user') }}" method="get">
+                                        <div class="input-group input-group-sm" style="width: 150px;">
+                                            <input type="text" name="search" class="form-control float-right"
+                                                placeholder="Search" value="{{ $request->get('search') }}">
 
-                                        <div class="input-group-append">
-                                            <button type="submit" class="btn btn-default">
-                                                <i class="fas fa-search"></i>
-                                            </button>
+                                            <div class="input-group-append">
+                                                <button type="submit" class="btn btn-default">
+                                                    <i class="fas fa-search"></i>
+                                                </button>
+                                            </div>
                                         </div>
-                                    </div>
+                                    </form>
                                 </div>
                             </div>
                             <!-- /.card-header -->
@@ -58,7 +59,8 @@
                                         @foreach ($data as $d)
                                             <tr>
                                                 <td>{{ $loop->iteration }}</td>
-                                                <td><img src="{{asset('storage/profil-image-user/'.$d->image)}}" width="100"></td>
+                                                <td><img src="{{ asset('storage/profil-image-user/' . $d->image) }}"
+                                                        width="100"></td>
                                                 <td>{{ $d->name }}</td>
                                                 <td>{{ $d->email }}</td>
                                                 <td>
@@ -83,7 +85,8 @@
                                                                     {{ $d->name }}</strong></p>
                                                         </div>
                                                         <div class="modal-footer justify-content-between">
-                                                            <form action="{{ route('admin.user.delete', ['id' => $d->id]) }}"
+                                                            <form
+                                                                action="{{ route('admin.user.delete', ['id' => $d->id]) }}"
                                                                 method="post">
                                                                 @csrf
                                                                 @method('DELETE')
