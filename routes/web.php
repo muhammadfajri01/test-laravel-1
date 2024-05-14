@@ -27,6 +27,8 @@ Route::get('/logout',[App\Http\Controllers\LoginController::class,'logout'])->na
 Route::group(['prefix' => 'admin','middleware' => ['auth'],'as' => 'admin.'],function(){
     Route::get('/dashboard',[App\Http\Controllers\DashboardController::class,'index'])->name('dashboard');
     Route::get('/dashboard/users',[App\Http\Controllers\DashboardController::class,'userview'])->name('user');
+    Route::get('/dashboard/clientside',[App\Http\Controllers\DataTableController::class,'clientside'])->name('clientside');
+    Route::get('/dashboard/serverside',[App\Http\Controllers\DataTableController::class,'serverside'])->name('serverside');
 
     Route::get('/dashboard/users/create',[App\Http\Controllers\DashboardController::class,'usercreate'])->name('user.create');
     Route::post('/dashboard/users/store',[App\Http\Controllers\DashboardController::class,'store'])->name('user.store');
