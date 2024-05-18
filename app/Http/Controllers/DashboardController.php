@@ -5,14 +5,20 @@ namespace App\Http\Controllers;
 use App\Models\User;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Validator;
 
 class DashboardController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('role:admin|writer');
+    }
     public function index(){
-        return view('dashboard.index');
+            return view('dashboard.index');
+        return abort(403);
     }
 
     public function userview(Request $request){
@@ -83,7 +89,7 @@ class DashboardController extends Controller
 
         User::whereId($id)->update($data);
 
-        return redirect()->route('user');
+        return redirect()->route('admin.user');
     }
 
     public function delete(Request $request,$id){

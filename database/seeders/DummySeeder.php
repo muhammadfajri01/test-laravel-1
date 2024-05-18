@@ -14,13 +14,13 @@ class DummySeeder extends Seeder
      */
     public function run(): void
     {
-        for ($i=0; $i < 2000     ; $i++) {
-            User::create([
-                'name' => 'userKe'.$i,
-                'email' => 'user'.$i.'@gmail.com',
-                'password' => Hash::make('password')
-            ]);
-        }
+        // for ($i=0; $i < 2000     ; $i++) {
+        //     User::create([
+        //         'name' => 'userKe'.$i,
+        //         'email' => 'user'.$i.'@gmail.com',
+        //         'password' => Hash::make('password')
+        //     ]);
+        // }
 
     }
 }
