@@ -73,13 +73,18 @@ class DashboardController extends Controller
     }
 
     public function update(Request $request,$id){
+        // $image = $request->file('image');
+        // dd($image);
         $validator = Validator::make($request->all(),[
             'name' => 'required',
             'email' => 'required|email',
             'password' => 'nullable',
+            'image' => 'nullable|mimes:png,jpg,jpeg|max:5120',
         ]);
 
         if($validator->fails()) return redirect()->back()->withErrors($validator)->withInput();
+
+        $find = User::find($id);
 
         $data['name'] = $request->name;
         $data['email'] = $request->email;
@@ -87,7 +92,21 @@ class DashboardController extends Controller
             $data['password'] = Hash::make($request->password);
         }
 
-        User::whereId($id)->update($data);
+        $image = $request->file('image');
+
+        if ($image) {
+            $filename = date('Y-m-d').$image->getClientOriginalName();
+            $path = 'profil-image-user/'.$filename;
+
+            if ($find->image) {
+                Storage::disk('public')->delete('profil-image-user/'.$find->image);
+            }
+
+            Storage::disk('public')->put($path,file_get_contents($image));
+
+            $data['image'] = $filename;
+        }
+        $find->update($data);
 
         return redirect()->route('admin.user');
     }

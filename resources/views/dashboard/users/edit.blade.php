@@ -22,7 +22,7 @@
         <!-- Main content -->
         <section class="content">
             <div class="container-fluid">
-                <form action="{{ route('admin.user.update',['id' => $data->id]) }}" method="post">
+                <form action="{{ route('admin.user.update',['id' => $data->id]) }}" method="post" enctype="multipart/form-data">
                     @csrf
                     @method('PUT')
                     <div class="row">
@@ -60,6 +60,24 @@
                                             @error('password')
                                                 <small>{{ $message }}</small>
                                             @enderror
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-9">
+                                                <div class="form-group">
+                                                    <label for="exampleInputImage">Profil image</label>
+                                                    <input type="file" name="image" class="form-control"
+                                                        id="exampleInputImage">
+                                                        <small>upload baru foto jika ingin mengganti foto lama</small>
+                                                    @error('image')
+                                                        <small>{{ $message }}</small>
+                                                    @enderror
+                                                </div>
+                                            </div>
+                                            <div class="col-3">
+                                                @if ($data->image)
+                                                    <img src="{{ asset('storage/profil-image-user/' . $data->image) }}" alt="" width="100" height="100">
+                                                @endif
+                                            </div>
                                         </div>
                                     </div>
                                     <!-- /.card-body -->

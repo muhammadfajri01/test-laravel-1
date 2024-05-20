@@ -59,8 +59,8 @@
                                         @foreach ($data as $d)
                                             <tr>
                                                 <td>{{ $loop->iteration }}</td>
-                                                <td><img src="{{ asset('storage/profil-image-user/' . $d->image) }}"
-                                                        width="100"></td>
+                                                <td><a href="#"><img src="{{ asset('storage/profil-image-user/' . $d->image) }}"
+                                                    width="100" height="100"></a></td>
                                                 <td>{{ $d->name }}</td>
                                                 <td>{{ $d->email }}</td>
                                                 <td>
