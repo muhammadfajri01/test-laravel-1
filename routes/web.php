@@ -33,6 +33,7 @@ Route::group(['prefix' => 'admin','middleware' => ['auth'],'as' => 'admin.'],fun
     Route::get('/dashboard/users/create',[App\Http\Controllers\DashboardController::class,'usercreate'])->name('user.create');
     Route::post('/dashboard/users/store',[App\Http\Controllers\DashboardController::class,'store'])->name('user.store');
 
+    Route::get('/dashboard/users/detail/{id}',[App\Http\Controllers\DashboardController::class,'detail'])->name('user.detail');
     Route::get('/dashboard/users/edit/{id}',[App\Http\Controllers\DashboardController::class,'edit'])->name('user.edit');
     Route::put('/dashboard/users/update/{id}',[App\Http\Controllers\DashboardController::class,'update'])->name('user.update');
 

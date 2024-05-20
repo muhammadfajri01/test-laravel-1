@@ -18,7 +18,6 @@ class DashboardController extends Controller
     }
     public function index(){
             return view('dashboard.index');
-        return abort(403);
     }
 
     public function userview(Request $request){
@@ -66,6 +65,11 @@ class DashboardController extends Controller
 
     }
 
+    public function detail(Request $request,$id){
+        $data = User::find($id);
+
+        return view('dashboard.users.detail',compact('data'));
+    }
     public function edit(Request $request,$id){
         $data = User::find($id);
 

@@ -59,5 +59,6 @@ class PermissionSeeder extends Seeder
         $user2->assignRole('writer');
 
         $user->givePermissionTo('view_dashboard', 'view_chart_on_dashboard');
+        $user2->givePermissionTo('view_dashboard');
     }
 }

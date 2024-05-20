@@ -51,6 +51,7 @@
                                             <th>No</th>
                                             <th>Profile Image</th>
                                             <th>Name</th>
+                                            <th>NIK</th>
                                             <th>Email</th>
                                             <th>Action</th>
                                         </tr>
@@ -62,8 +63,11 @@
                                                 <td><a href="#"><img src="{{ asset('storage/profil-image-user/' . $d->image) }}"
                                                     width="100" height="100"></a></td>
                                                 <td>{{ $d->name }}</td>
+                                                <td>{{ $d->ktp->nik ?? '' }}</td>
                                                 <td>{{ $d->email }}</td>
                                                 <td>
+                                                    <a href="{{ route('admin.user.detail', ['id' => $d->id]) }}"
+                                                        class="btn btn-primary"><i class="fas fa-eye">Detail</i></a>
                                                     <a href="{{ route('admin.user.edit', ['id' => $d->id]) }}"
                                                         class="btn btn-primary"><i class="fas fa-pen">Edit</i></a>
                                                     <a data-toggle="modal" data-target="#modal-hapus{{ $d->id }}"
