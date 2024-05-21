@@ -70,6 +70,13 @@ class DashboardController extends Controller
 
         return view('dashboard.users.detail',compact('data'));
     }
+
+    public function assets(Request $request){
+        $data = User::all();
+
+        return view('dashboard.assets',compact('data'));
+    }
+
     public function edit(Request $request,$id){
         $data = User::find($id);
 
