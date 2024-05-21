@@ -25,11 +25,12 @@
                 <div class="row">
                     <div class="col-12">
                         <a href="{{ route('admin.user.create') }}" class="btn btn-primary mb-3">Create User</a>
+                        <a href="{{ route('admin.assets') }}?export=pdf" class="btn btn-danger mb-3">Export PDF</a>
                         <div class="card">
                             <div class="card-header">
                                 <h3 class="card-title">Data Karyawan</h3>
                                 <div class="card-tools">
-                                    {{-- <form action="{{ route('admin.user') }}" method="get">
+                                    <form action="{{ route('admin.user') }}" method="get">
                                         <div class="input-group input-group-sm" style="width: 150px;">
                                             <input type="text" name="search" class="form-control float-right"
                                                 placeholder="Search" value="{{ $request->get('search') }}">
@@ -40,7 +41,7 @@
                                                 </button>
                                             </div>
                                         </div>
-                                    </form> --}}
+                                    </form>
                                 </div>
                             </div>
                             <!-- /.card-header -->

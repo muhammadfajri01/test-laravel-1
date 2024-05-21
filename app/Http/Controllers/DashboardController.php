@@ -9,6 +9,7 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Validator;
+use Barryvdh\DomPDF\Facade\Pdf;
 
 class DashboardController extends Controller
 {
@@ -72,9 +73,21 @@ class DashboardController extends Controller
     }
 
     public function assets(Request $request){
-        $data = User::all();
+        $data = new User;
 
-        return view('dashboard.assets',compact('data'));
+        if($request->get('search')){
+            $data = $data->where('name','LIKE','%'.$request->get('search').'%')
+            ->orWhere('email','LIKE','%'.$request->get('search').'%');
+        }
+
+        $data = $data->get();
+
+        if ($request->get('export') == 'pdf') {
+            $pdf = Pdf::loadView('pdf.assets', ['data' => $data]);
+            return $pdf->stream('data assets.pdf');
+        }
+
+        return view('dashboard.assets',compact('data','request'));
     }
 
     public function edit(Request $request,$id){
